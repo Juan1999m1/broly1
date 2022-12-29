@@ -1,0 +1,744 @@
+repeat
+    task.wait()
+until game:IsLoaded()
+repeat
+    task.wait()
+until game.Players.LocalPlayer.Character
+game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+game.Players.LocalPlayer.Character:WaitForChild("PowerOutput")
+task.wait(Settings.Waittime)
+
+-- Variables --
+local Client = game.Players.LocalPlayer
+local Rootpart = game.Players.LocalPlayer.Character.HumanoidRootPart
+-----------------
+
+-- Queue and Earth Sequence --
+
+if Client.PlayerGui.HUD.Bottom.Stats.LVL.Val.Text == AdvanceSettings.MaxLvlStop then
+    print(AdvanceSettings.MaxLvlStop .. "MAX LEVEL REACHED")
+    return
+end
+
+spawn(
+    function()
+        if Customize.BeARealG == true then
+            while wait() do
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
+                    Client.Name .. "- Is A Real G",
+                    "All"
+                )
+                wait(.5)
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Made By Bread", "All")
+                wait(7)
+            end
+        end
+    end
+)
+
+local plr = game.Players.LocalPlayer.Name
+
+if Customize.on == true then
+    Workspace.Camera.FieldOfView = Customize.Fov
+end
+
+local Places = {
+    536102540, -- Earth --
+    3565304751, -- Queue --
+    2050207304 -- Broly --
+}
+
+if game.PlaceId == Places[2] then
+    game:GetService "RunService".RenderStepped:Connect(
+        function()
+            game.Players.LocalPlayer.PlayerGui.HUD.Bottom.SP.Visible = true
+            Client.PlayerGui.HUD.Bottom.SP.Text =
+                "Bread Broly  |  Level:  " ..
+                Client.PlayerGui.HUD.Bottom.Stats.LVL.Val.Text ..
+                    "  | Time : " .. math.ceil(Workspace.DistributedGameTime)
+            Client.PlayerGui.HUD.Bottom.SP.BackgroundColor3 = Color3.new(0, 0, 0)
+            game.Players.LocalPlayer.PlayerGui.HUD.Bottom.Stats.Visible = true
+            game.Players.LocalPlayer.PlayerGui.HUD.Bottom.Stats.BackgroundColor3 = Color3.new(0, 0, 0)
+            game.Players.LocalPlayer.PlayerGui.HUD.Bottom.Stats.BorderColor3 = Color3.new(0, 0, 0)
+            game.Players.LocalPlayer.PlayerGui.HUD.Bottom.Stats.ImageColor3 = Color3.new(-.8, 0, 0)
+            game.Players.LocalPlayer.PlayerGui.HUD.Bottom.Stats.ImageColor3 = Color3.new(0, 0, 0)
+        end
+    )
+end
+
+if TypeBroly.Queue == true then
+    if game.PlaceId == Places[1] then
+        game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+    end
+end
+
+if Customize.on == true then
+    if Customize.Sky == true then
+        print("Sky is ....")
+        s = Instance.new("Sky")
+        s.Name = "Sky"
+        s.Parent = game.Lighting
+        skybox = 9432984298
+        ID = "http://www.roblox.com/asset/?id=" .. skybox
+        s.SkyboxBk = ID
+        s.SkyboxDn = ID
+        s.SkyboxFt = ID
+        s.SkyboxLf = ID
+        s.SkyboxRt = ID
+        s.SkyboxUp = ID
+        game.Lighting.TimeOfDay = 12.59
+    end
+end
+
+local death =
+    coroutine.create(
+    function()
+        game:GetService("RunService").RenderStepped:Connect(
+            function()
+                if game:GetService("Workspace").Live[Client.Name].Humanoid.Health < .1 then
+                    game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+                end
+            end
+        )
+    end
+)
+coroutine.resume(death)
+
+if TypeBroly.Earth == true and Settings.Invisible == false then
+    if game.PlaceId == Places[2] then
+        game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+    elseif game.PlaceId == Places[1] then
+        local BodyDestroy = CFrame.new(2751.733642578125, 3945.459228515625, -2272.65966796875)
+        game:GetService("TweenService"):Create(
+            game.Players.LocalPlayer.Character.HumanoidRootPart,
+            TweenInfo.new(3, Enum.EasingStyle.Quint),
+            {CFrame = BodyDestroy}
+        ):Play()
+        wait(45)
+        game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+    end
+end
+
+if game.PlaceId == Places[2] and Settings.Invisible == true then
+    TypeBroly.Queue = false
+    local BodyDestroy = CFrame.new(-750.429443359375, 238.59996032714844, -389.54925537109375)
+    game:GetService("TweenService"):Create(
+        game.Players.LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(1, Enum.EasingStyle.Quint),
+        {CFrame = BodyDestroy}
+    ):Play()
+    wait(.2)
+    game.Workspace.Live[Client.Name].LowerTorso:Destroy()
+    wait(1)
+    number = math.random(1, 7)
+    print(number)
+    local pads = {
+        one = CFrame.new(-27.2137909, 239.029785, -423.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        two = CFrame.new(-27.2137909, 239.029785, -291.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        three = CFrame.new(-27.2137909, 239.029785, -883.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        four = CFrame.new(-27.2137909, 239.029785, -1050.40063, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        five = CFrame.new(-27.2137909, 239.029785, -147.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        six = CFrame.new(-27.2137909, 239.029785, -731.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        seven = CFrame.new(-27.2137909, 239.029785, -589.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+    }
+    if number == 1 then
+        Rootpart.CFrame = pads.one
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 2 then
+        Rootpart.CFrame = pads.two
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 3 then
+        Rootpart.CFrame = pads.three
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 4 then
+        Rootpart.CFrame = pads.four
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 5 then
+        Rootpart.CFrame = pads.five
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 6 then
+        Rootpart.CFrame = pads.six
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 7 then
+        Rootpart.CFrame = pads.seven
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    end
+    wait(1)
+    Rootpart.Anchored = true
+    wait(25)
+    game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+end
+
+if game.PlaceId == Places[2] and Settings.Invisible == false then
+    print("Invisible off and tween....")
+    Settings.Queue = false
+    number = math.random(1, 7)
+    print(number)
+    local pads = {
+        one = CFrame.new(-27.2137909, 239.029785, -423.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        two = CFrame.new(-27.2137909, 239.029785, -291.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        three = CFrame.new(-27.2137909, 239.029785, -883.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        four = CFrame.new(-27.2137909, 239.029785, -1050.40063, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        five = CFrame.new(-27.2137909, 239.029785, -147.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        six = CFrame.new(-27.2137909, 239.029785, -731.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+        seven = CFrame.new(-27.2137909, 239.029785, -589.400574, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+    }
+    if number == 1 then
+        Rootpart.CFrame = pads.one
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 2 then
+        Rootpart.CFrame = pads.two
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 3 then
+        Rootpart.CFrame = pads.three
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 4 then
+        Rootpart.CFrame = pads.four
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 5 then
+        Rootpart.CFrame = pads.five
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 6 then
+        Rootpart.CFrame = pads.six
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    elseif number == 7 then
+        Rootpart.CFrame = pads.seven
+        workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+    end
+    wait(1)
+    Rootpart.Anchored = true
+    local args = {[1] = "h"}
+    game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Transform:FireServer(unpack(args))
+    wait(25)
+    game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+end
+
+if AdvanceSettings.HideLvl == true then
+    (game:GetService("RunService")).RenderStepped:Connect(
+        function()
+            for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if v.Name:find("Lvl.") then
+                    v:Destroy()
+                end
+            end
+        end
+    )
+end
+
+if Customize.on == true then
+    if Customize.lowgfx == true then
+        game.Lighting.TimeOfDay = "00:00:00:"
+        for _, v in pairs(workspace:GetDescendants()) do
+            if
+                v.ClassName == "Part" or v.ClassName == "SpawnLocation" or v.ClassName == "WedgePart" or
+                    v.ClassName == "Terrain" or
+                    v.ClassName == "MeshPart"
+             then
+                v.BrickColor = BrickColor.new(155, 155, 155)
+                v.Material = "Plastic"
+            end
+        end
+
+        for _, v in pairs(workspace:GetDescendants()) do
+            if v.ClassName == "Decal" or v.ClassName == "Texture" then
+                v:Destroy()
+            end
+        end
+    end
+end
+
+local prompt = assert(game:GetService("CoreGui"):FindFirstChild("promptOverlay", true), "Lol it should work :/")
+assert(
+    not prompt:FindFirstChild("ErrorPrompt"),
+    prompt:FindFirstChild("ErrorPrompt") and wait(2) and
+        game:GetService("TeleportService"):Teleport(Places[1], game:GetService("Players").LocalPlayer)
+)
+prompt.ChildAdded:Connect(
+    function(child)
+        assert(
+            child,
+            typeof(child) == "Instance" and child.Name == "ErrorPrompt" and child.ClassName == "Frame" and wait(2) and
+                game:GetService("TeleportService"):Teleport(Places[1], game:GetService("Players").LocalPlayer)
+        )
+    end
+)
+
+repeat
+    wait()
+until game:IsLoaded() and game.Players.LocalPlayer.Character
+
+-- Auto Start --
+
+game:GetService "RunService".RenderStepped:Connect(
+    function()
+        local Client = game.Players.LocalPlayer
+        game.Players.LocalPlayer.PlayerGui.HUD.Bottom.SP.Visible = true
+        Client.PlayerGui.HUD.Bottom.SP.Text =
+            "Bread Broly  |  Level:  " ..
+            Client.PlayerGui.HUD.Bottom.Stats.LVL.Val.Text ..
+                "  | Time : " ..
+                    math.ceil(Workspace.DistributedGameTime) ..
+                        " | Broly Health : " .. math.floor(Workspace.Live["Broly BR"].Humanoid.Health)
+        Client.PlayerGui.HUD.Bottom.SP.BackgroundColor3 = Color3.new(0, 0, 0)
+    end
+)
+
+game:GetService("RunService").Stepped:connect(
+    function()
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    end
+)
+
+local Gosolo =
+    coroutine.create(
+    function()
+        if game.PlaceId == Places[3] then
+            if AntiLeach.Solo == true then
+                if #game.Players:GetChildren() > 1 then
+                    wait()
+                    game.Players.LocalPlayer:Kick("Player Found")
+                end
+            end
+        end
+    end
+)
+coroutine.resume(Gosolo)
+
+local rejoin =
+    coroutine.create(
+    function()
+        if game.PlaceId == Places[3] then
+            wait(Settings.Time)
+            print("rejoin active ..")
+            game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+        end
+        State = "waiting for time .."
+    end
+)
+coroutine.resume(rejoin)
+
+local found = game.Workspace.Live["Broly BR"]:FindFirstChild("Head")
+local BrolyDead =
+    coroutine.create(
+    function()
+        game:GetService("RunService").Stepped:Connect(
+            function()
+                local Broly = "Broly BR"
+                if game:GetService("Workspace").Live[Broly].Humanoid.Health < 0.05 then
+                    State = "Broly Dead"
+                    if TypeBroly.Earth == true then
+                        game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+                    elseif TypeBroly.Earth == false then
+                        game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+                    end
+                end
+            end
+        )
+        game:GetService("RunService").Stepped:Connect(
+            function()
+                if game.Workspace.Live[Client.Name].Humanoid.Health <= Client.Character.Humanoid.MaxHealth * .05 then
+                    print(Client.Name .. " Dead")
+                    State = "Client Dead"
+                    if TypeBroly.Earth == true then
+                        game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+                    elseif TypeBroly.Earth == false then
+                        game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+                    end
+                end
+            end
+        )
+        if game.PlaceId == Places[3] then
+            wait()
+            if found then
+                State = "Broly Found"
+                if not found then
+                    State = "Broly Not Found"
+                    Client:Kick("Broly Not Found")
+                    if TypeBroly.Earth == true then
+                        game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+                    elseif TypeBroly.Earth == false then
+                        game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+                    end
+                end
+            end
+        end
+    end
+)
+coroutine.resume(BrolyDead)
+
+local Animator =
+    coroutine.create(
+    function()
+        if Customize.Animate == true then
+            game.Players.LocalPlayer.Character.Humanoid.Animator.Parent = game.Workspace.Live["Broly BR"].Humanoid
+            wait(.1)
+            game:GetService("Workspace").Live["Broly BR"].Humanoid.Animator:Destroy()
+            wait(.2)
+            game:GetService("Workspace").Live["Broly BR"].Humanoid.Animator:Destroy()
+            wait(.3)
+            game:GetService("Workspace").Live["Broly BR"].Humanoid.Animator:Destroy()
+        end
+    end
+)
+coroutine.resume(Animator)
+
+local GrabCheck =
+    coroutine.create(
+    function()
+        wait(AdvanceSettings.GrabCheck)
+        if game:GetService("Workspace").Live["Broly BR"].Stats["Health-Max"].Value < 53589 then
+            game.Players.LocalPlayer:Kick("Broly Not Dead Yet")
+            if TypeBroly.Earth == true then
+                game:GetService("TeleportService"):Teleport(Places[1], LocalPlayer)
+            elseif TypeBroly.Earth == false then
+                game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+            end
+        end
+    end
+)
+coroutine.resume(GrabCheck)
+
+local GoGod =
+    coroutine.create(
+    function()
+        local God = true
+        while God == true do
+            local Client = game.Players.LocalPlayer
+            wait()
+            if
+                game.Workspace.Live[Client.Name].Humanoid.Health <= Client.Character.Humanoid.MaxHealth * .2 and
+                    game.Workspace.Live[Client.Name].Ki.Value <= Workspace.Live[Client.Name].Ki.MaxValue * .2
+             then
+                Client.Backpack.ServerTraits.Transform:FireServer("g")
+                wait()
+                Client.Backpack.ServerTraits.Transform:FireServer("h")
+                wait()
+                Client.Backpack.ServerTraits.Transform:FireServer("g")
+            end
+        end
+        State = "God Working"
+    end
+)
+coroutine.resume(GoGod)
+
+spawn(
+    function()
+        if TransformType.LateTransform == true then
+            repeat
+                wait()
+            until game.Workspace.Live[Client.Name].Ki.Value <= Workspace.Live[Client.Name].Ki.MaxValue * .70
+            local args = {[1] = "g"}
+            game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Transform:FireServer(unpack(args))
+        end
+    end
+)
+
+spawn(
+    function()
+        if TransformType.Transform2 == true then
+            local args = {[1] = "h"}
+            game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Transform:FireServer(unpack(args))
+        end
+    end
+)
+
+local anchor =
+    coroutine.create(
+    function()
+        if game.PlaceId == Places[3] then
+            game:GetService("RunService").Stepped:connect(
+                function()
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                        CFrame.new(Workspace.Live["Broly BR"].HumanoidRootPart.Position)
+                    if Customize.Anchor == false then
+                        wait(.2)
+                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                        game.Workspace.Live[Client.Name].HumanoidRootPart.Anchored = false
+                        game.Workspace.Live["Broly BR"].HumanoidRootPart.Anchored = false
+                        game.Workspace.Live["Broly BR"].UpperTorso.Anchored = false
+                        game.Workspace.Live["Broly BR"].LowerTorso.Anchored = false
+                    elseif Customize.Anchor == true then
+                        wait(.2)
+                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                        game.Workspace.Live[Client.Name].HumanoidRootPart.Anchored = true
+                        game.Workspace.Live["Broly BR"].HumanoidRootPart.Anchored = true
+                        while task.wait() do
+                            workspace.CurrentCamera.CFrame = CFrame.new(0, 0, 0)
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+coroutine.resume(anchor)
+
+local dt =
+    coroutine.create(
+    function()
+        if game.PlaceId == Places[3] then
+            wait()
+            player = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+            local iplr = game.Players.LocalPlayer.Character
+            game.Players.LocalPlayer.Backpack:WaitForChild("Dragon Throw")
+            game.Players.LocalPlayer.Backpack["Dragon Throw"].Activator:WaitForChild("Flip")
+            if (game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Throw")) then
+                repeat
+                    wait()
+                    iplr.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack["Dragon Throw"])
+                until game.Players.LocalPlayer.Character:FindFirstChild("Dragon Throw")
+                repeat
+                    wait()
+                    iplr["Dragon Throw"]:Activate()
+                until player.Ki.Value < player.Ki.MaxValue
+                repeat
+                    wait()
+                    player["Dragon Throw"].Activator:FindFirstChild("Flip"):Destroy()
+                until not player["Dragon Throw"].Activator:FindFirstChild("Flip"):Destroy()
+            end
+        end
+    end
+)
+coroutine.resume(dt)
+
+local noslow =
+    coroutine.create(
+    function()
+        if game.PlaceId == Places[3] then
+            local Client = game.Players.LocalPlayer
+            local runService = game:GetService("RunService")
+            local debuffs = {
+                "Look",
+                "xx",
+                "Action",
+                "SuperAction",
+                "Attacking",
+                "Using",
+                "heavy",
+                "hyper",
+                "Hyper",
+                "Tele",
+                "tele",
+                "Slow",
+                "Killed",
+                "KiBlasted",
+                "MoveStart",
+                "Hyper",
+                "Dodging",
+                "KiBlasting",
+                "BStun",
+                "creator",
+                "KnockBacked",
+                "NotHardBack"
+            }
+            local function onCharacterAdded(character)
+                if (not character) then
+                    return
+                end
+                character.ChildAdded:Connect(
+                    function(child)
+                        runService.RenderStepped:Wait()
+                        if (table.find(debuffs, child.Name)) then
+                            child:Destroy()
+                        end
+                    end
+                )
+            end
+            onCharacterAdded(Client.Character)
+            Client.CharacterAdded:Connect(onCharacterAdded)
+        end
+    end
+)
+coroutine.resume(noslow)
+
+local beans =
+    coroutine.create(
+    function()
+        if game.PlaceId == Places[3] then
+            while task.wait() do
+                local args = {[1] = true}
+                game:GetService("Players").LocalPlayer.Backpack.ServerTraits.EatSenzu:FireServer(unpack(args))
+            end
+        end
+    end
+)
+coroutine.resume(beans)
+
+local pet =
+    coroutine.create(
+    function()
+        if Customize.on == true then
+            wait(Customize.Pet)
+            game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Assist:FireServer()
+        end
+    end
+)
+coroutine.resume(pet)
+
+coroutine.resume(
+    coroutine.create(
+        function()
+            while AdvanceSettings.OutputChange == true do
+                if
+                    Client.Character.LowerTorso:FindFirstChild("Ui3") and
+                        Client.PlayerGui.HUD.Bottom.SideMenu.Output.Perc.Text ~= "100%"
+                 then
+                    Client.Backpack.ServerTraits.Input:FireServer({"increase"}, true)
+                end
+                wait(.2)
+                if Client.Character.Ki.Value <= Client.Character.Ki.MaxValue * .09 then
+                    if Client.PlayerGui.HUD.Bottom.SideMenu.Output.Perc.Text ~= AdvanceSettings.Percent .. "%" then
+                        Client.Backpack.ServerTraits.Input:FireServer({"decrease"}, true)
+                    end
+                end
+            end
+        end
+    )
+)
+
+local Wave =
+    coroutine.create(
+    function()
+        game:GetService("RunService").Stepped:Connect(
+            function()
+                local det = {"ExplosiveWave"}
+                local Flash = "Flash Strike" or "Flash Skewer"
+                for i, v in pairs(game.Workspace:GetChildren()) do
+                    if table.find(det, v.Name) then
+                        v:Destroy()
+                        wait()
+                        Client.Character:FindFirstChild("Humanoid"):EquipTool(Client.Backpack[Flash])
+                        Client.Character[Flash]:Activate()
+                        Client.Character[Flash]:Deactivate()
+                        wait()
+                        if Client.Character[Flash] then
+                            Client.Character[Flash].Parent = Client.Backpack
+                        end
+                    end
+                end
+            end
+        )
+    end
+)
+coroutine.resume(Wave)
+
+local track =
+    coroutine.create(
+    function()
+        if AdvanceSettings.Tracking == true then
+            Target = "Broly BR"
+            for i, v in pairs(game.Workspace.Live:GetChildren()) do
+                if v.Name:match(Target) then
+                    for i, w in pairs(game.Workspace.Live:GetChildren()) do
+                        if string.match(string.lower(w.Name), string.lower(Target)) then
+                            _G.Track = true
+                            while _G.Track and game:GetService("RunService").Heartbeat:wait() do
+                                w:WaitForChild("HumanoidRootPart")
+                                for i, v in pairs(game.Workspace:GetChildren()) do
+                                    if v:FindFirstChild("Ki") and v:FindFirstChild("Mesh") then
+                                        v.CFrame = w.HumanoidRootPart.CFrame
+                                    end
+                                end
+                                for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                                    if v:FindFirstChild("Ki") and v:FindFirstChild("Mesh") then
+                                        v.CFrame = w.HumanoidRootPart.CFrame
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+)
+coroutine.resume(track)
+
+if AdvanceSettings.HideLvl == true then
+    (game:GetService("RunService")).RenderStepped:Connect(
+        function()
+            for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if v.Name:find("Lvl.") then
+                    v:Destroy()
+                end
+            end
+        end
+    )
+end
+
+wait(2)
+
+local SpamMoves =
+    coroutine.create(
+    function()
+        _G.spam = true
+        while _G.spam == true do
+            local client = game.Players.LocalPlayer
+            for i, v in pairs(client.Backpack:GetChildren()) do
+                if table.find(Moves, v.Name) then
+                    v.Parent = client.Character
+                    v:Activate()
+                    v:Deactivate()
+                    task.wait()
+                    v.Parent = client.Backpack
+                end
+            end
+        end
+    end
+)
+coroutine.resume(SpamMoves)
+
+local aimbot =
+    coroutine.create(
+    function()
+        if Customize.Aimbot == true then
+            repeat
+                wait()
+            until SpamMoves
+            game:GetService("RunService").RenderStepped:Connect(
+                function()
+                    wait()
+                    workspace.CurrentCamera.CFrame =
+                        CFrame.new(
+                        workspace.CurrentCamera.CFrame.Position,
+                        game.workspace.Live["Broly BR"].HumanoidRootPart.Position
+                    )
+                end
+            )
+        end
+    end
+)
+coroutine.resume(aimbot)
+
+local GrabCheck =
+    coroutine.create(
+    function()
+        wait(.5)
+        if not game.Workspace.Live["Broly BR"]:FindFirstChild("Override") then
+            game.Players.LocalPlayer:Kick("Broly Not Grabbed")
+            wait(2)
+            game:GetService("TeleportService"):Teleport(Places[2], LocalPlayer)
+        end
+    end
+)
+coroutine.resume(GrabCheck)
+
+coroutine.create(
+    coroutine.resume(
+        function()
+            if AdvanceSettings.Autopunch == true then
+                repeat
+                    wait()
+                until game.Workspace.Live[Client.Name].Ki.Value <= Workspace.Live[Client.Name].Ki.MaxValue * .1
+                local args = {
+                    [1] = {[1] = "m2"},
+                    [2] = CFrame.new(0, 0, 0) * CFrame.Angles(0, 0, 0),
+                    [3] = getNil("InputObject", "InputObject"),
+                    [4] = false
+                }
+                game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Input:FireServer(unpack(args))
+            end
+        end
+    )
+)
